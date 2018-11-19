@@ -2,6 +2,8 @@
 screen = 0
 import sys
 
+# general setup for Processing draw window
+
 def setup():
 	global title_font
 	global button_font
@@ -12,6 +14,8 @@ def setup():
 	button_font = createFont("Arial", 32)
 	detail_font = createFont("Arial", 22)
 
+# draw loop
+
 def draw():
 
 	global title_font
@@ -20,7 +24,11 @@ def draw():
 	global screen
 	rectMode(CENTER)
 
+	# main menu page
+
 	if (screen == 0):
+
+		# place text and button outlines
 
 		background(200)
 		fill(100)
@@ -46,6 +54,8 @@ def draw():
 		textFont(detail_font)
 		text("X",875,35)
 
+		# read button press based on mouse location
+
 		if (mousePressed and mouseX > 15 and mouseX < 285 and mouseY > 265 and mouseY < 365):
 			screen = 1
 		if (mousePressed and mouseX > 315 and mouseX < 585 and mouseY > 265 and mouseY < 365):
@@ -55,7 +65,12 @@ def draw():
 		if (mousePressed and mouseX > 850 and mouseX < 900 and mouseY > 0 and mouseY < 50):
 			sys.exit()
 
+	# Festival Suggestion Page
+
 	if (screen == 1):
+
+		# text and button outlines
+
 		background(200)
 		textFont(title_font)
 		fill(0)
@@ -69,10 +84,17 @@ def draw():
 		textFont(detail_font)
 		text("Main Menu",825,50)
 
+		# read button press based on mouse location
+
 		if (mousePressed and mouseX > 800 and mouseX < 850 and mouseY > 15 and mouseY < 65):
 			screen = 0
 
+	# Scheduler Page
+
 	if (screen == 2):
+
+		# text and button outlines
+
 		background(200)
 		textFont(title_font)
 		fill(0)
@@ -86,10 +108,17 @@ def draw():
 		textFont(detail_font)
 		text("Main Menu",825,50)
 
+		# read button press based on mouse location
+
 		if (mousePressed and mouseX > 800 and mouseX < 850 and mouseY > 15 and mouseY < 65):
 			screen = 0
 
+	# Randomizer Page
+
 	if (screen == 3):
+
+		# text and button outlines
+
 		background(200)
 		textFont(title_font)
 		fill(0)
@@ -102,6 +131,8 @@ def draw():
 		fill(0)
 		textFont(detail_font)
 		text("Main Menu",825,50)
+
+		# read button press based on mouse location
 
 		if (mousePressed and mouseX > 800 and mouseX < 850 and mouseY > 15 and mouseY < 65):
 			screen = 0
