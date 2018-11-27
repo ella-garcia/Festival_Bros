@@ -21,15 +21,13 @@ def select_festival(location, genre):
 
 	return possible_festivals
 
-
 #can be commented out when the time comes to use it with GUI
 def main():
 
 location = get_location(user_locations[0])
 genre = get_genre(user_genre[0])
 
-possible_festivals = choose_festival(location, genre)
+possible_festivals = select_festival(location, genre)
 
-schedule = schedule_no_conflicts(possible_festivals)
 
 main()
