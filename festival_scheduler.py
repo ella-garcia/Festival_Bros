@@ -13,9 +13,9 @@ def get_genre(user_genre):
 	return user_genre
 
 #Function that, given a location and genre, makes a list of possible festivals that the user would want to attend (including time conflicts, they will be accounted for in the scheduler)
-def select_festival(location, genre):
+def select_festival(location, genre, global_festivals_list):
 	possible_festivals = []	
-	for festival in list_of_festivals:
+	for festival in global_festivals_list:
 		if (festival.location == location) and (genre in festival.genres):
 			possible_festivals.append(festival)
 
