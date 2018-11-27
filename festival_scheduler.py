@@ -18,8 +18,10 @@ def select_festival(location, genre, global_festivals_list):
 	for festival in global_festivals_list:
 		if (festival.location == location) and (genre in festival.genres):
 			possible_festivals.append(festival)
-
-	return possible_festivals
+	if len(possible_festivals) == 0:
+		return -1
+	else: 
+		return possible_festivals
 
 #can be commented out when the time comes to use it with GUI
 def main():
@@ -28,6 +30,5 @@ location = get_location(user_locations[0])
 genre = get_genre(user_genre[0])
 
 possible_festivals = select_festival(location, genre)
-
 
 main()
