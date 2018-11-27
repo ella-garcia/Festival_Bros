@@ -1,22 +1,35 @@
 #Hard code variables for code development
 user_genre = ["Alternative", "Blues", "Christian", "Classical", "Country", "EDM", "Folk", "Hip Hop", "Indie", "Jazz", "Pop", "Rap", "Reggae", "Rock", "R&B"]
-user_locations = ["Austin", "New York", "Dallas", "San Francisco", "Santa Fe", "New Orleans", "New York"]
+user_locations = ["Austin", "New York", "Dallas", "San Francisco", "Santa Fe", "New Orleans"]
 user_times = [1, 13.5, 14, 22, 19.25, 20.5, 13.5, 27, 0, 24, -1.5, 22] #has 27, 0, 24, -1 to test that the times are greater than or equal to 0 and less than 24, and has duplicates to test conflicting times
 
 
-#Function to select the location that the user wants and output the festivals in that location or a function that checks that all the locations of the festivals that were given to us are in the same location if that's what we're going for?
-def select_location(user_location):
+#Fetches the genre from the user
+def get_location(user_location):
+	return user_location
 
+#Fetches the genre from the user
+def get_genre(user_genre):
+	return user_genre
 
-
-#Function to take the genre the user wants and output the festivals with that genre in the previously selected city 
-def select_genre(user_genre):
-
+#Function that, given a location and genre, makes a list of possible festivals that the user would want to attend (including time conflicts, they will be accounted for in the scheduler)
+def choose_festival(location, genre):	
 
 
 #Function to schedule festivals for the user with no conflicts-- outputs error if there are conflicting festivals and presents the user an option to select one of the conflicting festivals only
-def schedule_no_conflicts(user_times):
+def schedule_no_conflicts(possible_festivals):
 
+
+
+
+#can be commented out when the time comes to use it with GUI
 def main():
+
+location = get_location(user_locations[0])
+genre = get_genre(user_genre[0])
+
+possible_festivals = choose_festival(location, genre)
+
+schedule = schedule_no_conflicts(possible_festivals)
 
 main()
