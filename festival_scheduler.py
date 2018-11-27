@@ -13,13 +13,13 @@ def get_genre(user_genre):
 	return user_genre
 
 #Function that, given a location and genre, makes a list of possible festivals that the user would want to attend (including time conflicts, they will be accounted for in the scheduler)
-def choose_festival(location, genre):	
+def select_festival(location, genre):
+	possible_festivals = []	
+	for festival in list_of_festivals:
+		if (festival.location == location) and (genre in festival.genres):
+			possible_festivals.append(festival)
 
-
-#Function to schedule festivals for the user with no conflicts-- outputs error if there are conflicting festivals and presents the user an option to select one of the conflicting festivals only
-def schedule_no_conflicts(possible_festivals):
-
-
+	return possible_festivals
 
 
 #can be commented out when the time comes to use it with GUI
