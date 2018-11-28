@@ -1,5 +1,9 @@
+# IMPORT NECESSARY LIBRARIES
+import numpy
+
 # DECLARE VARIABLES & LISTS
 listGenres = ["Alternative, Blues, Christian, Classical, Country, EDM, Folk, Hip Hop, Indie, Jazz, Pop, Rap, Reggae, Rock, R&B"]
+dictShows = {}
 
 # FUNCTION TO DISPLAY MENU & SELECTION
 def menu_selection():
@@ -20,8 +24,15 @@ def genre_selection(listGenres):
 	strSelect = str("Please select the genre you are interested in:")
 
 # FUNCTION THAT PARSES LIST TO SELECT SHOWS
-def show_selection(dictShows):
+def show_selection(dictShows, numShow):
 	print
+
+# FUNCTION THAT CHOOSES A RANDOM SHOW
+def choose_random(dictShows):
+
+	numShow = randint(1, len(dictShows))
+	return numShow
+
 # MAIN
 def main():
 	genre_selection(listGenres)
