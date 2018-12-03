@@ -21,7 +21,10 @@ def select_festival(location, genre, global_festivals_list):
 
 def kind_of_random_shows(location, genre, global_festivals_list):
 	user_festivals = select_festival(location, genre, global_festivals_list)
+	
 	#From the list, make another list of all combinations of shows possible with non-conflicting times
+	
+
 
 	#Append all of these lists to a master list
 
