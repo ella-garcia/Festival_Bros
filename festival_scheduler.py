@@ -1,3 +1,4 @@
+import random.random
 #Hard code variables for code development
 #user_genre = ["Alternative", "Blues", "Christian", "Classical", "Country", "EDM", "Folk", "Hip Hop", "Indie", "Jazz", "Pop", "Rap", "Reggae", "Rock", "R&B"]
 #user_locations = ["Austin", "New York", "Dallas", "San Francisco", "Santa Fe", "New Orleans"]
@@ -17,3 +18,12 @@ def select_festival(location, genre, global_festivals_list):
 	#Return a list of all festivals in the desired location
 	else: 
 		return possible_festivals
+
+def kind_of_random_shows(location, genre, global_festivals_list):
+	user_festivals = select_festival(location, genre, global_festivals_list)
+	#From the list, make another list of all combinations of shows possible with non-conflicting times
+
+	#Append all of these lists to a master list
+
+	#pick one of the combinations randomly
+
