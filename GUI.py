@@ -13,6 +13,7 @@ band_selected = -1
 selected = 0
 bands = []
 showtimes = []
+festival = ''
 frame = 0
 import sys
 
@@ -47,6 +48,7 @@ def draw():
 	global selected
 	global bands
 	global showtimes
+	global Festival_Bros
 	global frame
 	rectMode(CENTER)
 
@@ -196,14 +198,30 @@ def draw():
 			offset = 0
 			for i in range(0,7):
 				fill(200,50,50)
-				rect(350,offset+150,150,50)
+				rect(300,offset+150,150,50)
 				fill(0)
 				textFont(detail_font)
-				text(cities[i],350,offset+160)
-				if(mousePressed and mouseX > 275 and mouseX < 425 and mouseY > offset+125 and mouseY < offset+175 and frame > 5):
+				text(cities[i],300,offset+160)
+				if(mousePressed and mouseX > 225 and mouseX < 375 and mouseY > offset+125 and mouseY < offset+175 and frame > 5):
 
 					#THIS IS THE CITY THE USER WANTS TO SEE ALL FESTIVALS FOR TO THEN CHOOSE WHICH ONE TO MAKE A SCHEDULE FOR
 					city2 = cities[i]
+				offset += 75
+
+			#THIS NEED TO BE THE FESTIVALS FOR THE CHOSEN CITY ABOVE. NEEDS TO CHANGE AS CITY CHANGES
+			festivals = ['festa','festb','festc','festd']
+
+			offset = 0
+			for i in range(0,len(festivals)):
+				fill(200,50,50)
+				rect(600,offset+150,150,50)
+				fill(0)
+				textFont(detail_font)
+				text(festivals[i],600,offset+160)
+				if(mousePressed and mouseX > 525 and mouseX < 675 and mouseY > offset+125 and mouseY < offset+175 and frame > 5):
+
+					#THIS IS THE CITY THE USER WANTS TO SEE ALL FESTIVALS FOR TO THEN CHOOSE WHICH ONE TO MAKE A SCHEDULE FOR
+					festival = festivals[i]
 					selected = 1
 					bands = []
 					showtimes = []
