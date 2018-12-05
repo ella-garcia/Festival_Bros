@@ -1,9 +1,5 @@
 import random.randint
 import datetime
-#Hard code variables for code development
-#user_genre = ["Alternative", "Blues", "Christian", "Classical", "Country", "EDM", "Folk", "Hip Hop", "Indie", "Jazz", "Pop", "Rap", "Reggae", "Rock", "R&B"]
-#user_locations = ["Austin", "New York", "Dallas", "San Francisco", "Santa Fe", "New Orleans"]
-
 
 #Function that, given a location and genre, makes a list of possible festivals that the user would want to attend (including time conflicts, they will be accounted for in the scheduler)
 def select_festival(location, genre, global_festivals_list):
@@ -48,13 +44,19 @@ def random_shows(festival):
 
 	#Select a random show that starts after the selected show ends
 	show_target = schedule[0]
-	
+	end_of_day = False 
+	while not end_of_day:
 		for show in shows:
 			if show.start.time > show_target.end.time:
 				shows_after_show.append(show)
-		show_index = random.randint(-1, (len(shows_after_show) + 1))
-		schedule.append(shows_after_show[show_index])
-		shows_after_show = []
-		index += 1
-		show_target = shows[new_index]
-
+		#Check that there are shows after the selected show
+		if len(shows_after_show) == 0:
+			end_of_day = True
+		else: 
+			show_index = random.randint(-1, (len(shows_after_show) + 1))
+			schedule.append(shows_after_show[show_index])
+			#Empty list, move index over one, select new target
+			shows_after_show = []
+			new_index += 1
+			show_target = shows[new_index]
+	return schedule
