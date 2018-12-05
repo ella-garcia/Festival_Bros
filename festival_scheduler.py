@@ -32,7 +32,7 @@ def random_shows(festival):
 	shows = festival.day.shows
 
 	#Make a list of shows before 1:00
-	time = 
+	time = datetime.time(13,0,0)
 	shows_before_1 = []
 	for show in shows:
 		if show.start.time <= time:
