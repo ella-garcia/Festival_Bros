@@ -49,7 +49,7 @@ def random_shows(festival):
 	time = 13.0
 	shows_before_1 = []
 	for show in shows:
-		if show.startTime <= time:
+		if show.start <= time:
 			shows_before_1.append(show)
 
 	#Get a random index to select a random show from this list
@@ -61,7 +61,7 @@ def random_shows(festival):
 	end_of_day = False 
 	while not end_of_day:
 		for show in shows:
-			if show.startTime >= show_target.endTime:
+			if show.start >= show_target.end:
 				shows_after_show.append(show)
 		#Check that there are shows after the selected show, if not exit loop
 		if len(shows_after_show) == 0:
@@ -81,6 +81,6 @@ def random_shows(festival):
 		show_strings = []
 		#Create list of strings to send back to GUI
 		for show in schedule: 
-			showstring = "Artist: " + str(show.artist) + "Start Time: " + str(show.startTime)
+			showstring = "Artist: " + str(show.artist) + "Start Time: " + str(show.start)
 			show_strings.append(showstring)
 		return show_strings
