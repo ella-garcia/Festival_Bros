@@ -11,25 +11,40 @@ def select_festival(location, genre, global_festivals_list):
 			possible_festivals.append(festival)
 	#Return error if there are no festivals
 	if len(possible_festivals) == 0:
-		return -1
+		return "ERROR: There are no festivals near this location."
 	#Return a list of all festivals in the desired location
 	else: 
 		return possible_festivals
+def get_days(festival):
+	if len(festival.days) == 0
+		return "ERROR: Festival has no days."
+	else:
+		return festival.days
 
+def get_shows(day):
+	if len(day.shows) == 0:
+		return "ERORR: day has no shows."
+	else:
+		return day.shows
 
+#Function to make a schedule of random shows and return a list of strings with artist/time
 def random_shows(festival):
 	#Create the empty Schedule
 	schedule = []
 
 	#Make a list of the Festival Days, randomly select a day
-	festival_days = festival.days
+	festival_days = get_days(festival)
+	if type(festival_days) == str:
+		return festival_days
 
 	#From the list, make another list of all combinations of shows possible with non-conflicting times
 	day_index = random.randint(-1, (len(festival_days) + 1))
 	day = festival_days[day_index]
 
 	#Get shows from the days
-	shows = festival.day.shows
+	shows = get_shows(day)
+	if type(shows) == str:
+		return shows
 
 	#Make a list of shows before 1:00
 	time = datetime.time(13,0,0)
