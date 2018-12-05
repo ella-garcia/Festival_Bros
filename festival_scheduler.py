@@ -15,6 +15,7 @@ def select_festival(location, genre, global_festivals_list):
 	#Return a list of all festivals in the desired location
 	else: 
 		return possible_festivals
+
 def get_days(festival):
 	if len(festival.days) == 0:
 		return "ERROR: Festival has no days."
@@ -23,9 +24,10 @@ def get_days(festival):
 
 def get_shows(day):
 	if len(day.shows) == 0:
-		return "ERORR: day has no shows."
+		return "ERROR: day has no shows."
 	else:
 		return day.shows
+
 #Function to make a schedule of random shows and return a list of strings with artist/time
 def random_shows(festival):
 	#Create the empty Schedule
@@ -84,3 +86,54 @@ def random_shows(festival):
 			showstring = "Artist: " + str(show.artist) + "Start Time: " + str(show.start)
 			show_strings.append(showstring)
 		return show_strings
+
+# Function that schedules shows based on user picks
+def festival_scheduler(festival):
+	user_schedule = []
+
+	#Make a list of the Festival Days, randomly select a day
+	festival_days = get_days(festival)
+	if type(festival_days) == str:
+		return festival_days
+
+	#Get shows from the days
+	shows = get_shows(day)
+	if type(shows) == str:
+		return shows
+
+	#User chooses shows they want to watch
+
+
+	#Check that the schedule list was made, return an error if not
+	if len(schedule) == 0:
+		return "ERROR: The list is empty-- there is no schedule."
+	else: 
+		show_strings = []
+		#Create list of strings to send back to GUI
+		for show in schedule: 
+			showstring = "Artist: " + str(show.artist) + "Start Time: " + str(show.start)
+			show_strings.append(showstring)
+		return show_strings
+
+# Function to save & write shows into text file
+def save_shows(artistList, timeList):
+
+	# write to text file
+	f = open('MyFestivalSchedule.txt', 'w')
+
+	f.write('My Festival Schedule:')
+
+	for i in range(len(artistList)):
+		f.write('Artist: ' + artistList(i) + ' | Time: ' + timeList(i))
+
+	# output string that file has been created
+	f.close()
+
+Takes in show objects save into text file
+'''
+1. Display list of festivals, user chooses 1 festival
+2. Display list of shows at festival
+3. User chooses shows they want to watch
+4. Schedule shows
+5. Display user's schedule
+'''
