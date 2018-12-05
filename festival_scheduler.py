@@ -32,7 +32,7 @@ def random_shows(festival):
 	shows = festival.day.shows
 
 	#Make a list of shows before 1:00
-	time = #Datetime object (13:00)
+	time = 
 	shows_before_1 = []
 	for show in shows:
 		if show.start.time <= time:
@@ -49,7 +49,7 @@ def random_shows(festival):
 		for show in shows:
 			if show.start.time > show_target.end.time:
 				shows_after_show.append(show)
-		#Check that there are shows after the selected show
+		#Check that there are shows after the selected show, if not exit loop
 		if len(shows_after_show) == 0:
 			end_of_day = True
 		else: 
@@ -59,4 +59,14 @@ def random_shows(festival):
 			shows_after_show = []
 			new_index += 1
 			show_target = shows[new_index]
-	return schedule
+	
+	#Check that the schedule list was made, return an error if not
+	if len(schedule) == 0:
+		return "ERROR: The list is empty-- there is no schedule."
+	else: 
+		show_strings = []
+		#Create list of strings to send back to GUI
+		for show in schedule: 
+			showstring = "Artist: " + str(show.artist) + "Start Time: " + str(show.start.time)
+			show_strings.append(showstring)
+		return show_strings
