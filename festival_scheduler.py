@@ -16,7 +16,7 @@ def select_festival(location, genre, global_festivals_list):
 	else: 
 		return possible_festivals
 def get_days(festival):
-	if len(festival.days) == 0
+	if len(festival.days) == 0:
 		return "ERROR: Festival has no days."
 	else:
 		return festival.days
@@ -26,7 +26,6 @@ def get_shows(day):
 		return "ERORR: day has no shows."
 	else:
 		return day.shows
-
 #Function to make a schedule of random shows and return a list of strings with artist/time
 def random_shows(festival):
 	#Create the empty Schedule
@@ -38,7 +37,7 @@ def random_shows(festival):
 		return festival_days
 
 	#From the list, make another list of all combinations of shows possible with non-conflicting times
-	day_index = random.randint(-1, (len(festival_days) + 1))
+	day_index = random.randint(0, (len(festival_days)))
 	day = festival_days[day_index]
 
 	#Get shows from the days
@@ -47,14 +46,14 @@ def random_shows(festival):
 		return shows
 
 	#Make a list of shows before 1:00
-	time = datetime.time(13,0,0)
+	time = 13.0
 	shows_before_1 = []
 	for show in shows:
-		if show.start.time <= time:
+		if show.startTime <= time:
 			shows_before_1.append(show)
 
 	#Get a random index to select a random show from this list
-	show_index = random.randint(-1, (len(shows_before_1) + 1))
+	show_index = random.randint(0, (len(shows_before_1)))
 	schedule.append(shows_before_1[show_index])
 
 	#Select a random show that starts after the selected show ends
@@ -62,7 +61,7 @@ def random_shows(festival):
 	end_of_day = False 
 	while not end_of_day:
 		for show in shows:
-			if show.start.time > show_target.end.time:
+			if show.startTime >= show_target.endTime:
 				shows_after_show.append(show)
 		#Check that there are shows after the selected show, if not exit loop
 		if len(shows_after_show) == 0:
@@ -82,6 +81,6 @@ def random_shows(festival):
 		show_strings = []
 		#Create list of strings to send back to GUI
 		for show in schedule: 
-			showstring = "Artist: " + str(show.artist) + "Start Time: " + str(show.start.time)
+			showstring = "Artist: " + str(show.artist) + "Start Time: " + str(show.startTime)
 			show_strings.append(showstring)
 		return show_strings
