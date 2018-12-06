@@ -1,6 +1,7 @@
 
 import random
 import datetime
+import sys
 
 screen = 0
 city = ''
@@ -18,8 +19,6 @@ bands = []
 showtimes = []
 festival = ''
 frame = 0
-import sys
-
 
 #Function that, given a location and genre, makes a list of possible festivals that the user would want to attend (including time conflicts, they will be accounted for in the scheduler)
 def select_festival(location, genre, global_festivals_list):
@@ -104,8 +103,6 @@ def random_shows(festival):
 			show_strings.append(showstring)
 		return show_strings
 
-import datetime
-
 class Show(object):
 	# The class "constructor" - It's actually an initializer 
 	def __init__(self, artist, start, end):
@@ -142,42 +139,64 @@ class Festival(object):
 	# create a Graph object
 
 def create_festival(txt_file):
-	#create list 
+	#create list
 	fest_days = []
 	shows = []
 	shows2 = []
 	shows3 = []
+	#day number iterative val
+	i=1
+	artistLine = True
+	artist = ""
+	start = 0
+	end = 0
 	# open file for reading
 	file = open (txt_file, "r")
 
-	#set count
-	count = 0
-
-
-
 	festival = file.readline().strip()
 	print ('Fest: ' + festival)
+
 	genres = file.readline().strip()
 	genre_list = genres.split('/')
 	print (genre_list)
+
 	location = file.readline().strip()
 	print ('Location: ' + location)
-	print ('Fest: ' + festival)
+
 	fest_start = file.readline().strip()
 	print ('Fest Start: ' + fest_start)
+	
 	fest_end = file.readline().strip()
 	print ('Fest End: ' + fest_end)
 
+	for line in file.readlines():
+		if not (';') in line and not ('DAY') in line :
+			if artistLine:
+				artist = line.strip()
+				print ("ARTIST: "+artist)
+				artistLine =  not artistLine
+			else:
+				show = line.strip()
+				print ("SHOW TIME:" + show)
+				artistLine = not artistLine
+				show1 = Show(artist, start, end)
+		else:
+			print ("*********NEW DAY**********")
+			i += 1
+			
+	return Festival(festival, fest_days, genre_list, location, fest_start, fest_end)
 
-	i = file.readline().strip()
-	print (i)
+""" 		if ";DAY" in line:
+			pass#Do something
 
-	while i != 'END':
+		else:
+			pass#Do something """
+""" 	while i != 'END':
 		day = i
 		print ('Day: ' + day)
 		i = file.readline().strip()
 
-		while i != ';':
+		while ';' not in i:
 
 			artist = i
 			#print ('Artist: ' + artist)
@@ -190,6 +209,7 @@ def create_festival(txt_file):
 
 
 			start_split = splittime[0].split(':')
+			print(start_split)
 			start_hour = float(start_split[0])
 			start_minute = float(start_split[1])/100
 
@@ -235,7 +255,7 @@ def create_festival(txt_file):
 
 	return Festival(festival, fest_days, genre_list, location, fest_start, fest_end)
 
-	print ('Done')
+	print ('Done') """
 
 GOV_BALL = create_festival('gov_copy.txt')
 #print (GOV_BALL)
@@ -262,7 +282,6 @@ def setup():
 # draw loop
 
 def draw():
-
 	global title_font
 	global button_font
 	global detail_font
@@ -294,9 +313,9 @@ def draw():
 
 		background(200)
 		fill(100)
-		rect(150,315,270,100)
-		rect(450,315,270,100)
-		rect(750,315,270,100)
+		rect(300,315,270,100)
+		rect(600,315,270,100)
+
 		fill(200,0,0)
 		rect(875,25,50,50)
 
@@ -306,9 +325,8 @@ def draw():
 		text("Festival Bros", 450, 50)
 
 		textFont(button_font)
-		text("Find Festivals\nNear Me", 150, 300)
-		text("Create a Custom\nFestival Schedule", 450, 300)
-		text("Randomize a\nFestival Schedule", 750, 300)
+		text("Find Festivals\nNear Me", 300, 300)
+		text("Create a Custom\nFestival Schedule", 600, 300)
 
 		textFont(button_font)
 		text("Welcome!", 450, 100)
