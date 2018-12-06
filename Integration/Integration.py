@@ -9,7 +9,7 @@ festival = ''
 genre = ''
 
 #THESE ARE PLACEHOLDERS. THEY WILL ACTUALLY JUST BE WHATEVER CITIES/GENRES THEY DECIDED ON AND HAVE IN THEIR CODE
-cities = ["Austin", "New York", "Dallas", "San Francisco", "Santa Fe", "New Orleans", "New York"]
+cities = ["Austin", "New York", "Dallas", "San Francisco", "Santa Fe", "New Orleans", "Las Vegas"]
 genres = ["Alternative", "Blues", "Christian", "Classical", "Country", "EDM", "Folk", "Hip-Hop", "Indie", "Jazz", "Pop", "Rap", "Rock", "R&B"]
 city_selected = -1
 genre_selected = -1
@@ -19,21 +19,19 @@ bands = []
 showtimes = []
 festival = ''
 frame = 0
+festivalNames = ["Governor's Ball","ACL","Coachella","Essence Fest"]
+festivalLocations = ["New York","Austin","Las Vegas","New Orleans"]
 
 #Function that, given a location and genre, makes a list of possible festivals that the user would want to attend (including time conflicts, they will be accounted for in the scheduler)
-def select_festival(location, genre, global_festivals_list):
+def select_festival(location):
 	possible_festivals = []	
 	#Iterate through the global festivals list
-	for festival in global_festivals_list:
-		#check that the item in the list matches location and genre, add to possibility list
-		if (festival.location == location) and (genre in festival.genres):
-			possible_festivals.append(festival)
-	#Return error if there are no festivals
-	if len(possible_festivals) == 0:
-		return [-1]
-	#Return a list of all festivals in the desired location
-	else: 
-		return possible_festivals
+	for indx,festival in enumerate(festivalNames):
+		if festivalLocations[indx] == location:
+			possible_festivals.append(festivalNames[indx])
+
+	print ( possible_festivals)
+	return (possible_festivals)
 
 def city_festivals(location,global_festivals_list):
 	possible_festivals = []
@@ -185,6 +183,7 @@ def create_festival(txt_file):
 			i += 1
 			
 	return Festival(festival, fest_days, genre_list, location, fest_start, fest_end)
+	
 
 """ 		if ";DAY" in line:
 			pass#Do something
@@ -257,10 +256,11 @@ def create_festival(txt_file):
 
 	print ('Done') """
 
-GOV_BALL = create_festival('gov_copy.txt')
+""" GOV_BALL = create_festival('gov_copy.txt')
 #print (GOV_BALL)
 
 global_festivals_list = [GOV_BALL]
+finalAnswer = select_festival("New Orleans") """
 festivals = [0]
 days = [0]
 day_num = 0
@@ -314,7 +314,7 @@ def draw():
 		background(200)
 		fill(100)
 		rect(300,315,270,100)
-		rect(600,315,270,100)
+
 
 		fill(200,0,0)
 		rect(875,25,50,50)
@@ -326,7 +326,6 @@ def draw():
 
 		textFont(button_font)
 		text("Find Festivals\nNear Me", 300, 300)
-		text("Create a Custom\nFestival Schedule", 600, 300)
 
 		textFont(button_font)
 		text("Welcome!", 450, 100)
@@ -414,17 +413,17 @@ def draw():
 		if(mousePressed and mouseX > 675 and mouseX < 825 and mouseY > 100 and mouseY < 175 and city_selected != -1 and genre_selected != -1):
 
 			#THIS NEEDS TO BE THE SUGGESTED FESTIVAL FROM THE ALGORITHM
-			festivals = select_festival(city,genre,global_festivals_list)
+			festivals = select_festival(city)
 
 		offset = 0
-		if festivals[0] == -1:
+		if len(festivals)==0:
 			text("No Matching Festivals",750,300)
 		elif(festivals[0]==0):
 			x=1
 		else:
 			for i in range(0,len(festivals)):
 				# display the suggested festival
-				text(festivals[i].festival_name,750,200+offset)
+				text(festivals[i],750,200+offset)
 				offset+=30
 
 		if(city_selected != -1 and genre_selected != -1 and mousePressed and mouseX > 625 and mouseX < 875 and mouseY > 275 and mouseY < 325 and frame>5):
@@ -436,6 +435,12 @@ def draw():
 		fill(0)
 		textFont(detail_font)
 		text("Main Menu",825,50)
+
+		fill(0,200,0)
+		rect(825,550,100,100)
+		fill(0)
+		textFont(detail_font)
+		text("Save to \n Text File",825,550)
 
 		# read button press based on mouse location
 
